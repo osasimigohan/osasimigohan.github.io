@@ -1,1 +1,0 @@
-# osasimigohan.github.io
