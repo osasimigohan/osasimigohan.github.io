@@ -185,7 +185,7 @@ startButton.addEventListener("click", () => {
     resultDiv.textContent = `結果: ${selectedPrize.name}`;
 
     // 特賞または四等の場合のリダイレクト処理
-    if (selectedPrize.name === "特賞" || selectedPrize.name === "4等") {
+    if (selectedPrize.name === "特賞　VIPルームサービス＆次回本指名セット料金無料♡" || selectedPrize.name === "4等　次回本指名料無料♡") {
       console.log("リダイレクト中: ", selectedPrize.name); // デバッグ用ログ
       window.location.href = `coupon.html?prize=${encodeURIComponent(selectedPrize.name)}`;
     }
