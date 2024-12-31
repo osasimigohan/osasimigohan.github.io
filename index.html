@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ナースモード♡新春お年玉ルーレット</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap'); /* ABJグーフォント */
+    @import url('https://fonts.googleapis.com/earlyaccess/reepokakukana.css');
 
     body {
       margin: 0;
-      font-family: 'ABeeZee', sans-serif;
+      font-family: 'ReePopKakuKana', sans-serif;
       background-color: #FFF0F5;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       height: 100vh;
       padding: 10px;
       box-sizing: border-box;
@@ -30,35 +30,57 @@
       position: relative;
       width: 80%;
       max-width: 300px;
-      height: 500px;
-      overflow: hidden;
-      border: 10px solid #FF1493;
-      border-radius: 10px;
-      background-color: #FFF;
+      height: auto;
+      aspect-ratio: 1;
     }
     #roulette {
-      position: relative;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      transform: translateY(0);
-      transition: transform 2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+      height: 100%;
+      border-radius: 50%;
+      border: 10px solid #FF1493;
+      background: conic-gradient(
+        #FFB6C1 0% 16.6%,
+        #FFC0CB 16.6% 33.3%,
+        #FFB6C1 33.3% 50%,
+        #FFC0CB 50% 66.6%,
+        #FFB6C1 66.6% 83.3%,
+        #FFC0CB 83.3% 100%
+      );
+      position: relative;
+      transform: rotate(0deg);
+      transition: transform 4s ease-out;
     }
     .sector {
-      height: 100px; /* 各セクターの高さ */
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      left: 50%;
+      top: 50%;
+      transform-origin: 0% 0%;
+      transform: rotate(0deg) translate(-100%, -100%);
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 16px;
-      font-weight: bold;
+      justify-content: center;
+      text-align: center;
+      font-size: 12px;
       color: #FFF;
-      text-shadow: 2px 2px 0 #FF69B4;
     }
-    .sector:nth-child(odd) {
-      background-color: #FFC0CB;
-    }
-    .sector:nth-child(even) {
-      background-color: #FFB6C1;
+    .sector:nth-child(2) { transform: rotate(60deg) translate(-100%, -100%); }
+    .sector:nth-child(3) { transform: rotate(120deg) translate(-100%, -100%); }
+    .sector:nth-child(4) { transform: rotate(180deg) translate(-100%, -100%); }
+    .sector:nth-child(5) { transform: rotate(240deg) translate(-100%, -100%); }
+    .sector:nth-child(6) { transform: rotate(300deg) translate(-100%, -100%); }
+
+    #pointer {
+      width: 20px;
+      height: 20px;
+      background-color: #FF1493;
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     }
     button {
       margin-top: 20px;
@@ -82,143 +104,91 @@
       text-shadow: 2px 2px 0 #FFF;
       text-align: center;
     }
-    #coupon {
-      display: none;
-      margin-top: 20px;
-      padding: 15px;
-      border: 2px dashed #FF69B4;
-      background-color: #FFF;
-      color: #FF69B4;
-      font-size: 14px;
-      text-align: center;
-      border-radius: 10px;
-    }
     #prizes {
-      margin-top: auto;
-      padding: 10px;
-      width: 100%;
-      text-align: center;
-      background-color: #FF69B4;
-      color: #FFF;
-      border-radius: 10px;
-      box-sizing: border-box;
-    }
-    #prizes ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    #prizes li {
-      margin-bottom: 5px;
+      margin-top: 20px;
       font-size: 14px;
+      color: #FF69B4;
+      text-align: left;
     }
   </style>
 </head>
 <body>
   <h1>ナースモード♡新春お年玉ルーレット</h1>
   <div id="roulette-container">
-    <div id="roulette"></div>
+    <div id="pointer"></div>
+    <div id="roulette">
+      <div class="sector">特賞</div>
+      <div class="sector">VIP</div>
+      <div class="sector">1000円OFF</div>
+      <div class="sector">500円OFF</div>
+      <div class="sector">本指名料無料</div>
+      <div class="sector">おもち♡</div>
+    </div>
   </div>
   <button id="start-button">スタート💉</button>
   <div id="result"></div>
-  <div id="coupon">
-    <p id="coupon-text"></p>
-    <p>有効期限: 2024年2月1日 AM5:00まで</p>
-    <button id="use-coupon-button">クーポンを使う</button>
-  </div>
   <div id="prizes">
-    <h2>賞一覧</h2>
+    <p>賞一覧</p>
     <ul>
-      <li>特賞: VIPルームサービス＆次回本指名セット料金無料♡</li>
-      <li>1等: VIPルームサービス♡</li>
-      <li>2等: お会計1000円OFF♡</li>
-      <li>3等: お会計500円OFF♡</li>
-      <li>4等: 次回本指名料無料♡</li>
-      <li>5等: 切り餅プレゼント♡</li>
+      <li>特賞 VIPルームサービス＆次回本指名セット料金無料♡</li>
+      <li>1等 VIPルームサービス♡</li>
+      <li>2等 お会計1000円OFF♡</li>
+      <li>3等 お会計500円OFF♡</li>
+      <li>4等 次回本指名料無料♡</li>
+      <li>5等 切り餅プレゼント♡</li>
     </ul>
   </div>
   <script>
+    const prizes = [
+      { name: '特賞　VIPルームサービス＆次回本指名セット料金無料♡', angle: 0, probability: 1 / 5000 },
+      { name: '1等　VIPルームサービス♡', angle: 60, probability: 10 / 5000 },
+      { name: '2等　お会計1000円OFF♡', angle: 120, probability: 20 / 5000 },
+      { name: '3等　お会計500円OFF♡', angle: 180, probability: 50 / 5000 },
+      { name: '4等　次回本指名料無料♡', angle: 240, probability: 100 / 5000 },
+      { name: '5等 切り餅プレゼント♡', angle: 300, probability: 4500 / 5000 },
+    ];
+
     const roulette = document.getElementById("roulette");
     const startButton = document.getElementById("start-button");
     const resultDiv = document.getElementById("result");
-    const couponDiv = document.getElementById("coupon");
-    const couponText = document.getElementById("coupon-text");
-    const useCouponButton = document.getElementById("use-coupon-button");
 
-    const prizes = [
-      { name: '特賞: VIPルームサービス＆次回本指名セット料金無料♡', probability: 1 / 5000, coupon: true },
-      { name: '1等: VIPルームサービス♡', probability: 100 / 5000, coupon: false },
-      { name: '2等: お会計1000円OFF♡', probability: 150 / 5000, coupon: false },
-      { name: '3等: お会計500円OFF♡', probability: 250 / 5000, coupon: false },
-      { name: '4等: 次回本指名料無料♡', probability: 300 / 5000, coupon: true },
-      { name: '5等: 切り餅プレゼント♡', probability: 4000 / 5000, coupon: false }
-    ];
-
-    let couponUsed = JSON.parse(localStorage.getItem("couponUsed")) || false;
-    let isRunning = false; // ルーレットが回転中かどうか
-
-    // セクターを無限に生成する
-    function populateInfiniteRoulette() {
-      for (let i = 0; i < 100; i++) { // ランダムに100個生成
-        const prize = prizes[Math.floor(Math.random() * prizes.length)];
-        const sector = document.createElement('div');
-        sector.className = 'sector';
-        sector.textContent = prize.name;
-        sector.dataset.coupon = prize.coupon;
-        roulette.appendChild(sector);
-      }
-    }
-
-    populateInfiniteRoulette();
+    let hasSpun = false;
 
     startButton.addEventListener("click", () => {
-      if (isRunning) {
-        // ストップ処理
-        isRunning = false;
-        const sectorHeight = 100;
-        const totalHeight = roulette.scrollHeight;
-        const randomStop = Math.floor(Math.random() * roulette.children.length) * sectorHeight;
+      if (hasSpun) {
+        resultDiv.textContent = "ルーレットは一度しか回せません。";
+        return;
+      }
+      
+      hasSpun = true;
+      startButton.disabled = true;
+      resultDiv.textContent = "";
 
-        roulette.style.transition = "transform 2s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
-        roulette.style.transform = `translateY(-${randomStop}px)`;
+      const random = Math.random();
+      let selectedPrize = prizes[prizes.length - 1]; // デフォルトは5等
 
-        setTimeout(() => {
-          const prizeIndex = Math.floor(randomStop / sectorHeight);
-          const selectedSector = roulette.children[prizeIndex % roulette.children.length];
+      for (const prize of prizes) {
+        if (random < prize.probability) {
+          selectedPrize = prize;
+          break;
+        }
+      }
 
-          const selectedPrize = {
-            name: selectedSector.textContent,
-            coupon: selectedSector.dataset.coupon === 'true',
-          };
+      const randomDegrees = selectedPrize.angle + 3600; // 最低10回転してから停止
+      roulette.style.transition = "transform 4s ease-out";
+      roulette.style.transform = `rotate(-${randomDegrees}deg)`;
 
-          resultDiv.textContent = `結果: ${selectedPrize.name}`;
-
-          if (selectedPrize.coupon && !couponUsed) {
-            couponText.textContent = `クーポン: ${selectedPrize.name}`;
-            couponDiv.style.display = "block";
-          }
-
-          startButton.textContent = "スタート💉"; // ボタンをリセット
-        }, 2000);
-      } else {
-        // スタート処理
-        isRunning = true;
+      setTimeout(() => {
         roulette.style.transition = "none";
-        roulette.style.transform = `translateY(0)`;
-        roulette.style.animation = "infinite-scroll 2s linear infinite";
-        startButton.textContent = "ストップ💉";
-      }
-    });
+        roulette.style.transform = `rotate(-${selectedPrize.angle}deg)`;
 
-    useCouponButton.addEventListener("click", () => {
-      if (confirm("クーポンを使用しますか？")) {
-        alert("クーポンが使用されました！");
-        couponUsed = true;
-        localStorage.setItem("couponUsed", JSON.stringify(couponUsed));
-        couponDiv.style.display = "none";
-      }
+        resultDiv.textContent = `結果: ${selectedPrize.name}`;
+
+        if (selectedPrize.name === "特賞" || selectedPrize.name === "4等") {
+          window.location.href = `coupon.html?prize=${encodeURIComponent(selectedPrize.name)}`;
+        }
+      }, 4000);
     });
   </script>
 </body>
 </html>
-
