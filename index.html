@@ -140,11 +140,11 @@
   </div>
   <script>
     const prizes = [
-      { name: '特賞　VIPルームサービス＆次回本指名セット料金無料♡', angle: 0, probability: 4500 / 5000 },
-      { name: '1等　VIPルームサービス♡', angle: 60, probability: 10 / 5000 },
-      { name: '2等　お会計1000円OFF♡', angle: 120, probability: 20 / 5000 },
-      { name: '3等　お会計500円OFF♡', angle: 180, probability: 50 / 5000 },
-      { name: '4等　次回本指名料無料♡', angle: 240, probability: 100 / 5000 },
+      { name: '特賞 VIPルームサービス＆次回本指名セット料金無料♡', angle: 0, probability: 4500 / 5000 },
+      { name: '1等 VIPルームサービス♡', angle: 60, probability: 10 / 5000 },
+      { name: '2等 お会計1000円OFF♡', angle: 120, probability: 20 / 5000 },
+      { name: '3等 お会計500円OFF♡', angle: 180, probability: 50 / 5000 },
+      { name: '4等 次回本指名料無料♡', angle: 240, probability: 100 / 5000 },
       { name: '5等 切り餅プレゼント♡', angle: 300, probability: 4500 / 5000 },
     ];
 
@@ -178,23 +178,21 @@
       roulette.style.transition = "transform 4s ease-out";
       roulette.style.transform = `rotate(-${randomDegrees}deg)`;
       
-setTimeout(() => {
-  roulette.style.transition = "none";
-  roulette.style.transform = `rotate(-${selectedPrize.angle}deg)`;
+      setTimeout(() => {
+        roulette.style.transition = "none";
+        roulette.style.transform = `rotate(-${selectedPrize.angle}deg)`;
 
-  resultDiv.textContent = `結果: ${selectedPrize.name}`;
+        resultDiv.textContent = `結果: ${selectedPrize.name}`;
 
-  // リダイレクト URL の設定
-  const basePath = "https://osasimigohan.github.io/osasimitaberu"; // リポジトリURL
-  if (
-    selectedPrize.name.trim() === "特賞　VIPルームサービス＆次回本指名セット料金無料♡" || 
-    selectedPrize.name.trim() === "4等　次回本指名料無料♡"
-  ) {
-    window.location.href = `${basePath}/coupon.html?prize=${encodeURIComponent(selectedPrize.name)}`;
-  }
-}, 4000);
-
+        const basePath = "https://osasimigohan.github.io/osasimitaberu"; // リポジトリURL
+        if (
+          selectedPrize.name.trim() === "特賞 VIPルームサービス＆次回本指名セット料金無料♡" || 
+          selectedPrize.name.trim() === "4等 次回本指名料無料♡"
+        ) {
+          window.location.href = `${basePath}/coupon.html?prize=${encodeURIComponent(selectedPrize.name)}`;
+        }
+      }, 4000);
+    });
   </script>
 </body>
 </html>
-
