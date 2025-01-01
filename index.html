@@ -178,20 +178,17 @@ startButton.addEventListener("click", () => {
   roulette.style.transition = "transform 4s ease-out";
   roulette.style.transform = `rotate(-${randomDegrees}deg)`;
   
-  setTimeout(() => {
-    roulette.style.transition = "none";
-    roulette.style.transform = rotate(-${selectedPrize.angle}deg);
+      setTimeout(() => {
+        roulette.style.transition = "none";
+        roulette.style.transform = `rotate(-${selectedPrize.angle}deg)`;
 
-    resultDiv.textContent = 結果: ${selectedPrize.name};
+        resultDiv.textContent = `結果: ${selectedPrize.name}`;
 
-    // 特賞または四等の場合のリダイレクト処理
-    if (selectedPrize.name === "特賞" || selectedPrize.name === "4等") {
-      console.log("リダイレクト中: ", selectedPrize.name); // デバッグ用ログ
-      window.location.href = coupon.html?prize=${encodeURIComponent(selectedPrize.name)};
-    }
-  }, 4000);
-});
-
+        if (selectedPrize.name.trim() === "特賞　VIPルームサービス&次回本指名セット料金無料♡" || selectedPrize.name.trim() === "4等　次回本指名料無料♡") {
+          window.location.href = `coupon.html?prize=${encodeURIComponent(selectedPrize.name)}`;
+        }
+      }, 4000);
+    });
 
 </body>
 </html>
