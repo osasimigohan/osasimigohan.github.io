@@ -183,7 +183,9 @@
         roulette.style.transform = `rotate(-${selectedPrize.angle}deg)`;
 
         resultDiv.textContent = `結果: ${selectedPrize.name}`;
-
+        
+        const repositoryName = "your-repository-name"; // リポジトリ名を設定
+        const basePath = `https://username.github.io/${repositoryName}/`;
         if (selectedPrize.name.trim() === "特賞 VIPルームサービス&次回本指名セット料金無料♡" || selectedPrize.name.trim() === "4等 次回本指名料無料♡") {
           window.location.href = `./coupon.html?prize=${encodeURIComponent(selectedPrize.name)}`;
 
