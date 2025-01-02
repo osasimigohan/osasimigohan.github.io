@@ -14,7 +14,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       height: 100vh;
       padding: 10px;
       box-sizing: border-box;
@@ -122,6 +122,24 @@
       font-size: 14px;
       color: #FF69B4;
     }
+    #prizes {
+      width: 100%;
+      text-align: center;
+      background-color: #FFF;
+      padding: 10px;
+      border-top: 2px solid #FF1493;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+    #prizes ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    #prizes li {
+      font-size: 14px;
+      color: #FF69B4; /* 賞一覧の文字をピンク色に設定 */
+      margin: 5px 0;
+    }
   </style>
 </head>
 <body>
@@ -139,6 +157,10 @@
   </div>
   <button id="start-button">スタート💉</button>
   <div id="result"></div>
+  <div id="coupon">
+    <div id="coupon-code"></div>
+    <div id="coupon-instructions">この画面をスクリーンショットで保存してください！<br>次回来店時にスクリーンショットの提示でクーポンご利用可能です♪</div>
+  </div>
   <div id="prizes">
     <p>賞一覧</p>
     <ul>
@@ -146,20 +168,18 @@
       <li>1等 VIPルームサービス♡</li>
       <li>2等 お会計1000円OFF♡</li>
       <li>3等 お会計500円OFF♡</li>
+      <li>4等 次回本指名料無料♡</li>
+      <li>5等 切り餅プレゼント♡</li>
     </ul>
-  </div>
-  <div id="coupon">
-    <div id="coupon-code"></div>
-    <div id="coupon-instructions">この画面をスクリーンショットで保存してください！<br>次回来店時にスクリーンショットの提示でクーポンご利用可能です♪</div>
   </div>
   <script>
     const prizes = [
-      { name: '特賞 VIPルームサービス＆次回本指名セット料金無料♡', angle: 0, probability: 0.05 },
-      { name: '1等 VIPルームサービス♡', angle: 60, probability: 0.1 },
-      { name: '2等 お会計1000円OFF♡', angle: 120, probability: 0.2 },
-      { name: '3等 お会計500円OFF♡', angle: 180, probability: 0.3 },
-      { name: '4等 次回本指名料無料♡', angle: 240, probability: 0.4 },
-      { name: '5等 切り餅プレゼント♡', angle: 300, probability: 0.8 },
+      { name: '特賞 VIPルームサービス＆次回本指名セット料金無料♡', angle: 0, probability: 1 / 5000 },
+      { name: '1等 VIPルームサービス♡', angle: 60, probability: 25 / 5000 },
+      { name: '2等 お会計1000円OFF♡', angle: 120, probability: 50 / 5000 },
+      { name: '3等 お会計500円OFF♡', angle: 180, probability: 100 / 5000 },
+      { name: '4等 次回本指名料無料♡', angle: 240, probability: 900 / 5000 },
+      { name: '5等 切り餅プレゼント♡', angle: 300, probability: 4500 / 5000 },
     ];
 
     const roulette = document.getElementById("roulette");
@@ -186,7 +206,7 @@
 
       const random = Math.random();
       let cumulativeProbability = 0;
-      let selectedPrize = prizes[prizes.length - 1]; // Default to the last prize
+      let selectedPrize = prizes.find(prize => prize.name.includes('5等')); // Default to 5等
 
       for (const prize of prizes) {
         cumulativeProbability += prize.probability;
@@ -216,4 +236,3 @@
   </script>
 </body>
 </html>
-
