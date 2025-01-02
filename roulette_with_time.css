@@ -101,6 +101,7 @@ button:hover {
 #prizes ul {
   list-style-type: none;
   padding: 0;
+  coler: #FF69B4;
   margin: 0;
 }
 
